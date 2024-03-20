@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить на главный экран</title>
+    <link rel="manifest" href="/manifest.json">
+</head>
+<body>
+    <h1>Приветствуем на нашем сайте!</h1>
+    <button id="add-to-home-screen">Добавить на главный экран</button>
+
+    <script>
+        let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  // Предотвращаем немедленный показ диалога установки
+  e.preventDefault();
+  // Сохраняем событие, чтобы запустить его позже
+  deferredPrompt = e;
+  // Обновляем интерфейс, чтобы показать пользователю кнопку установки
+  document.getElementById('add-to-home-screen').style.display = 'block';
+});
+
+document.getElementById('add-to-home-screen').addEventListener('click', () => {
+  // Скрываем наш интерфейс
+  document.getElementById('add-to-home-screen').style.display = 'none';
+  // Показываем диалог установки
+  deferredPrompt.prompt();
+  // Ожидаем, что пользователь ответит на запрос
+  deferredPrompt.userChoice.then((choiceResult) => {
+    if (choiceResult.outcome === 'accepted') {
+      console.log('Пользователь принял запрос на добавление на главный экран');
+    } else {
+      console.log('Пользователь отклонил запрос на добавление на главный экран');
+    }
+    deferredPrompt = null;
+  });
+});
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Algolia Places Demo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/algolia-places/dist/cdn/algolia-places.min.css">
+    <style>
+        .ap-input-icon {
+            right: 5px;
+        }
+        input {
+            width: 300px;
+            padding: 10px;
+            margin: 40px 0;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<input type="search" id="address-input" placeholder="Начните вводить адрес..." />
+
+<script src="https://cdn.jsdelivr.net/npm/algolia-places/dist/cdn/algolia-places.min.js"></script>
+<script>
+    var placesAutocomplete = places({
+        appId: 'plYOUR_APP_ID', // Замените это на ваш Algolia Places App ID
+        apiKey: 'plYOUR_API_KEY', // Замените это на ваш Algolia Places API Key
+        container: document.querySelector('#address-input')
+    });
+</script>
+
+</body>
+</html>
